@@ -1,11 +1,24 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Navbar from '../components/Navbar.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import "../styles/global.scss";
+import styles from './index.module.scss';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="pt-BR">
+  <head>
+    <title>Home | Escritório de Advocacia</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Site institucional de um escritório de advocacia." />
+  </head>
+  <body>
+    <Header />
+    <Navbar />
+    <main class={styles.main}>
+      <h1>Bem-vindo ao Escritório de Advocacia</h1>
+      <p>Atuamos com ética, excelência e compromisso na defesa dos interesses de nossos clientes.</p>
+    </main>
+    <Footer />
+  </body>
+</html>

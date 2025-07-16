@@ -1,0 +1,33 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.scss";
+import styles from './contact.module.scss';
+---
+
+<html lang="pt-BR">
+  <head>
+    <title>Contato | Escritório de Advocacia</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Entre em contato com nosso escritório de advocacia." />
+  </head>
+  <body>
+    <Header />
+    <Navbar />
+    <main class={styles.main}>
+      <h1>Contato</h1>
+      <p>Fale conosco para agendar uma consulta ou tirar dúvidas. Estamos à disposição.</p>
+      <form>
+        <label for="nome">Nome:</label><br />
+        <input type="text" id="nome" name="nome" required /><br />
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required /><br />
+        <label for="mensagem">Mensagem:</label><br />
+        <textarea id="mensagem" name="mensagem" required></textarea><br />
+        <button type="submit">Enviar</button>
+      </form>
+    </main>
+    <Footer />
+  </body>
+</html>

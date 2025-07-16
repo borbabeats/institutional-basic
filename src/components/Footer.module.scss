@@ -1,0 +1,20 @@
+@use '../styles/_color.scss' as color;
+
+.footer {
+  background: color.$gray;
+  color: color.$text;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 2rem;
+
+
+.footer p {
+  margin: 0;
+}
+
+.footer p + p {
+  margin-top: 0.2rem;
+  font-size: 0.95rem;
+}
+}
