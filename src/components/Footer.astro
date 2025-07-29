@@ -1,7 +1,44 @@
 ---
 import styles from './Footer.module.scss';
+import { Instagram, Phone, Mail } from 'lucide-astro';
+import LogoAdv from './icons/logoAdv.astro';
 ---
 <footer class={styles.footer}>
-  <p>&copy; 2025 Escritório de Advocacia. Todos os direitos reservados.</p>
-  <p>Contato: contato@advocacia.com.br</p>
+  <div class={styles.footer__content}>
+    <div class={styles.footer__logo}>
+      <LogoAdv />
+    </div>
+    <div class={styles.footer__navbar}>
+      <nav class={styles.footer__nav}>
+        <ul class={styles.footer__navList}>
+          <h3 class={styles.footer__navTitle}>Acesso Rápido</h3>
+          <li class={styles.footer__navItem}><a href="#" class={styles.footer__navLink}>Home</a></li>
+          <li class={styles.footer__navItem}><a href="#" class={styles.footer__navLink}>Sobre Nós</a></li>
+          <li class={styles.footer__navItem}><a href="#" class={styles.footer__navLink}>Contato</a></li>
+          <li class={styles.footer__navItem}><a href="#" class={styles.footer__navLink}>Blog</a></li>
+        </ul>
+        <ul class={styles.footer__navList}>
+          <h3 class={styles.footer__navTitle}>Contato</h3>
+          <li class={styles.footer__navItem}>
+            <a href="tel:+5511999999999" class={styles.footer__contactLink}>
+              <Phone class={styles.footer__icon} /> (11) 99999-9999
+            </a>
+          </li>
+          <li class={styles.footer__navItem}>
+            <a href="mailto:contato@exemplo.com" class={styles.footer__contactLink}>
+              <Mail class={styles.footer__icon} /> contato@exemplo.com
+            </a>
+          </li>
+          <li class={`${styles.footer__navItem} ${styles['footer__navItem--social']}`}>
+            <a href="#" class={styles.footer__socialLink} aria-label="Instagram">
+              <Instagram class={styles.footer__icon} />
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class={styles.footer__copyright}>
+    <p> 2024 Todos os direitos reservados</p>
+  </div>
 </footer>

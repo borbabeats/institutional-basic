@@ -1,20 +1,92 @@
 @use '../styles/_color.scss' as color;
+@use '../styles/_sizes.scss' as sizes;
 
 .footer {
-  background: color.$gray;
-  color: color.$text;
+  background: color.$primary;
+  color: color.$light;
   padding: 1.2rem 1rem;
   text-align: center;
   font-size: 1rem;
   margin-top: 2rem;
 
+  &__content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    @include sizes.container;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem 0;
+  }
 
-.footer p {
-  margin: 0;
-}
+  &__logo {
+    flex: 0 0 auto;
+  }
 
-.footer p + p {
-  margin-top: 0.2rem;
-  font-size: 0.95rem;
-}
+  &__navbar {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  &__navList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  &__navTitle {
+    color: color.$accent;
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+  }
+
+  &__navItem {
+    margin-bottom: 0.5rem;
+
+    &--social {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(color.$light, 0.1);
+    }
+  }
+
+  &__navLink,
+  &__contactLink,
+  &__socialLink {
+    color: color.$light;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: color.$accent;
+    }
+  }
+
+  &__icon {
+    color: color.$accent;
+    flex-shrink: 0;
+  }
+
+  &__copyright {
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(color.$light, 0.1);
+    margin-top: 1rem;
+    
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  }
 }

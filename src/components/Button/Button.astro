@@ -1,0 +1,58 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import styles from './Button.module.scss';
+
+interface Props extends HTMLAttributes<'button' | 'a'> {
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'secondary' | 'text';
+  size?: 'small' | 'medium' | 'large';
+  fullWidth?: boolean;
+  disabled?: boolean;
+}
+
+const { 
+  href, 
+  type = 'button', 
+  variant = 'primary',
+  size = 'medium',
+  fullWidth = false,
+  disabled = false,
+  class: className, 
+  ...rest 
+} = Astro.props;
+
+const isLink = !!href;
+const buttonClasses = [
+  styles.button,
+  styles[`button--${variant}`],
+  styles[`button--${size}`],
+  fullWidth && styles['button--full-width'],
+  disabled && styles['is-disabled'],
+  className
+].filter(Boolean);
+---
+
+{isLink ? (
+  <a 
+    href={href} 
+    class:list={buttonClasses}
+    aria-disabled={disabled}
+    {...rest}
+  >
+    <span class={styles.button__content}>
+      <slot />
+    </span>
+  </a>
+) : (
+  <button 
+    type={type} 
+    class:list={buttonClasses}
+    disabled={disabled}
+    {...rest}
+  >
+    <span class={styles.button__content}>
+      <slot />
+    </span>
+  </button>
+)}

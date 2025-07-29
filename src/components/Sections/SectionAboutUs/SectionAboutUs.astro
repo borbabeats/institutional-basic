@@ -1,0 +1,32 @@
+---
+import './SectionAboutUs.scss';
+import Button from '../../Button/Button.astro';
+---
+<section class="about-us">
+    <div class="about-us__container">
+        <div class="about-us__content">
+            <div class="about-us__header">
+                <span class="about-us__subtitle">Sobre nós</span>
+                <h2 class="about-us__title">Quem Somos</h2>
+            </div>
+            <div class="about-us__text">
+                <p>Somos um escritório de advocacia comprometido com a excelência jurídica e a solução personalizada para cada caso.</p>
+                <p>Nossa equipe é formada por profissionais experientes e especializados em diversas áreas do direito.</p>
+                <p>Trabalhamos com dedicação total para garantir os melhores resultados para nossos clientes.</p>
+            </div>
+            <div class="about-us__action">
+                <Button href="/contato" class="about-us__button">
+                    Saiba mais
+                </Button>
+            </div>
+        </div>
+        <div class="about-us__image">
+            <img 
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                alt="Equipe de profissionais executivos em reunião"
+                loading="lazy"
+                class="about-us__img"
+            />
+        </div>
+    </div>
+</section>

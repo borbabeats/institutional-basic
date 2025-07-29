@@ -9,7 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.11.1"
+    "astro": "^5.12.5",
+    "lucide-astro": "^0.533.0"
   },
   "devDependencies": {
     "sass": "^1.89.2"

@@ -1,9 +1,22 @@
 ---
 import styles from './Navbar.module.scss';
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'Sobre Nós' },
+  { href: '/contact', label: 'Contato' },
+  { href: '/blog', label: 'Blog' }
+];
 ---
+
 <nav class={styles.navbar}>
-  <a href="/">Home</a>
-  <a href="/about">Sobre Nós</a>
-  <a href="/contact">Contato</a>
-  <a href="/blog">Blog</a>
+  <ul class={styles.navbar__list}>
+    {navItems.map((item) => (
+      <li class={styles.navbar__item}>
+        <a href={item.href} class={styles.navbar__link}>
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
 </nav>

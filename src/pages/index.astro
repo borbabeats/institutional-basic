@@ -1,24 +1,32 @@
 ---
-import Navbar from '../components/Navbar.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import "../styles/global.scss";
 import styles from './index.module.scss';
+import Layout from '../layouts/Layout.astro';
+import SectionAboutUs from '../components/Sections/SectionAboutUs/SectionAboutUs.astro';
+import SectionAreas from '../components/Sections/SectionAreas/SectionAreas.astro';
+import Button from '../components/Button/Button.astro';
 ---
 
-<html lang="pt-BR">
-  <head>
-    <title>Home | Escritório de Advocacia</title>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Site institucional de um escritório de advocacia." />
-  </head>
-  <body>
-    <Header />
-    <Navbar />
-    <main class={styles.main}>
-      <h1>Bem-vindo ao Escritório de Advocacia</h1>
-      <p>Atuamos com ética, excelência e compromisso na defesa dos interesses de nossos clientes.</p>
-    </main>
-    <Footer />
-  </body>
-</html>
+<Layout>
+  <main class="page-home">
+    <section class="hero">
+      <div class="hero__container">
+        <div class="hero__content">
+          <h1 class="hero__title">Bem-vindo ao Escritório de Advocacia</h1>
+          <p class="hero__subtitle">Atuamos com ética, excelência e compromisso na defesa dos interesses de nossos clientes.</p>
+          <div class="hero__actions">
+            <Button href="/contato" variant="primary" size="large">
+              Entre em contato
+            </Button>
+            <Button href="#sobre" variant="secondary" size="large">
+              Saiba mais
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <SectionAboutUs />
+    <SectionAreas />
+  </main>
+</Layout>

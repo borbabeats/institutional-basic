@@ -1,0 +1,25 @@
+---
+interface Props {
+  width?: string | number;
+  height?: string | number;
+  className?: string;
+}
+
+const { width = 150, height = 50, className = '' } = Astro.props;
+---
+
+<svg 
+  width={width} 
+  height={height} 
+  viewBox="0 0 200 60" 
+  fill="none" 
+  xmlns="http://www.w3.org/2000/svg"
+  class={className}
+>
+  <path d="M40 40L30 50H50L40 40Z" fill="currentColor"/>
+  <path d="M40 20L30 10H50L40 20Z" fill="currentColor"/>
+  <path d="M40 20V40" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  <path d="M20 30H60" stroke="currentColor" stroke-width="4"/>
+  <path d="M80 15H180V45H160V25H80V15Z" fill="currentColor"/>
+  <text x="90" y="40" fill="currentColor" font-family="Arial" font-size="16" font-weight="bold">ADVOCACIA</text>
+</svg>

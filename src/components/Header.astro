@@ -1,7 +1,13 @@
 ---
 import styles from './Header.module.scss';
+import LogoAdv from './icons/logoAdv.astro';
+import Navbar from './Navbar.astro';
 ---
 <header class={styles.header}>
-  <h1>Escritório de Advocacia</h1>
-  <p>Excelência e ética em soluções jurídicas</p>
+  <div class={styles.header__content}>
+    <div class={styles.header__logo}>
+      <LogoAdv />
+    </div>
+    <Navbar className={styles.header__navbar} />
+  </div>
 </header>

@@ -1,24 +1,12 @@
 ---
-import Navbar from '../components/Navbar.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import "../styles/global.scss";
 import styles from './about.module.scss';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="pt-BR">
-  <head>
-    <title>Sobre Nós | Escritório de Advocacia</title>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Conheça o nosso escritório de advocacia, nossa história, missão e valores." />
-  </head>
-  <body>
-    <Header />
-    <Navbar />
-    <main class={styles.main}>
-      <h1>Sobre Nós</h1>
-      <p>Somos um escritório de advocacia comprometido com a excelência, ética e resultados para nossos clientes. Nossa equipe é formada por profissionais experientes e dedicados.</p>
-    </main>
-    <Footer />
-  </body>
-</html>
+<Layout>
+  <main class={styles.main}>
+    <h1>Sobre Nós</h1>
+    <p>Somos um escritório de advocacia comprometido com a excelência, ética e resultados para nossos clientes. Nossa equipe é formada por profissionais experientes e dedicados.</p>
+  </main>
+</Layout>

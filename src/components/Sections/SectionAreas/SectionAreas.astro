@@ -1,0 +1,48 @@
+---
+import './SectionAreas.scss';
+
+const areas = [
+  {
+    title: 'Direito Empresarial',
+    description: 'Assessoria jurídica completa para empresas, incluindo contratos, fusões e aquisições, e compliance.'
+  },
+  {
+    title: 'Direito Tributário',
+    description: 'Planejamento tributário, consultoria e defesa em processos administrativos e judiciais.'
+  },
+  {
+    title: 'Direito Trabalhista',
+    description: 'Assessoria em relações trabalhistas, negociações coletivas e defesa em processos trabalhistas.'
+  },
+  {
+    title: 'Direito Civil',
+    description: 'Atuação em questões contratuais, responsabilidade civil, direito de família e sucessões.'
+  },
+  {
+    title: 'Direito Imobiliário',
+    description: 'Assessoria em transações imobiliárias, regularização de imóveis e ações possessórias.'
+  },
+  {
+    title: 'Direito Digital',
+    description: 'Proteção de dados, compliance LGPD, contratos de tecnologia e crimes cibernéticos.'
+  }
+];
+---
+
+<section class="section-areas">
+  <div class="section-areas__container">
+    <div class="section-areas__header">
+      <span class="section-areas__header__subtitle">Áreas de Atuação</span>
+      <h2 class="section-areas__header__title">Nossas Especialidades</h2>
+    </div>
+    
+    <div class="section-areas__grid">
+      {areas.map((area) => (
+        <div class="section-areas__card">
+          <h3 class="section-areas__card__title">{area.title}</h3>
+          <p class="section-areas__card__description">{area.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
