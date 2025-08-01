@@ -1,7 +1,7 @@
 @use '../../../styles/_color.scss' as color;
 @use '../../../styles/_sizes.scss' as sizes;
 
-.about-us {
+.aboutUsSecondary {
     background: color.$light;
     padding: 6rem 0;
     
@@ -20,7 +20,7 @@
     
     &__content {
         flex: 1;
-        max-width: 600px;
+        max-width: 50%;
     }
     
     &__header {
@@ -59,7 +59,7 @@
     
     &__title {
         color: color.$primary;
-        font-size: 2.5rem;
+
         margin: 1rem 0;
         line-height: 1.2;
     }
@@ -67,6 +67,7 @@
     &__text {
         margin-bottom: 2rem;
         line-height: 1.6;
+        max-width: 50%;
         
         p {
             margin: 0 0 1rem 0;
@@ -75,29 +76,6 @@
             &:last-child {
                 margin-bottom: 0;
             }
-        }
-    }
-    
-    &__action {
-        margin-top: 2rem;
-    }
-    
-    &__image {
-        flex: 1;
-        max-width: 600px;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-    
-    &__img {
-        width: 100%;
-        height: auto;
-        display: block;
-        transition: transform 0.3s ease;
-        
-        &:hover {
-            transform: scale(1.02);
         }
     }
 }

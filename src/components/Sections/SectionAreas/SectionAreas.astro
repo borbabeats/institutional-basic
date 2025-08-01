@@ -1,48 +1,64 @@
 ---
-import './SectionAreas.scss';
+import styles from './SectionAreas.module.scss';
+import Button from '../../Button/Button.astro';
 
 const areas = [
   {
     title: 'Direito Empresarial',
-    description: 'Assessoria jurídica completa para empresas, incluindo contratos, fusões e aquisições, e compliance.'
+    description: 'Assessoria jurídica completa para empresas, incluindo contratos, fusões e aquisições, e compliance.',
+    icon: 'business'
   },
   {
     title: 'Direito Tributário',
-    description: 'Planejamento tributário, consultoria e defesa em processos administrativos e judiciais.'
+    description: 'Planejamento tributário, consultoria e defesa em processos administrativos e judiciais.',
+    icon: 'account_balance'
   },
   {
     title: 'Direito Trabalhista',
-    description: 'Assessoria em relações trabalhistas, negociações coletivas e defesa em processos trabalhistas.'
+    description: 'Assessoria em relações trabalhistas, negociações coletivas e defesa em processos trabalhistas.',
+    icon: 'work'
   },
   {
     title: 'Direito Civil',
-    description: 'Atuação em questões contratuais, responsabilidade civil, direito de família e sucessões.'
+    description: 'Atuação em questões contratuais, responsabilidade civil, direito de família e sucessões.',
+    icon: 'gavel'
   },
   {
     title: 'Direito Imobiliário',
-    description: 'Assessoria em transações imobiliárias, regularização de imóveis e ações possessórias.'
+    description: 'Assessoria em transações imobiliárias, regularização de imóveis e ações possessórias.',
+    icon: 'home'
   },
   {
     title: 'Direito Digital',
-    description: 'Proteção de dados, compliance LGPD, contratos de tecnologia e crimes cibernéticos.'
+    description: 'Proteção de dados, compliance LGPD, contratos de tecnologia e crimes cibernéticos.',
+    icon: 'security'
   }
 ];
 ---
 
-<section class="section-areas">
-  <div class="section-areas__container">
-    <div class="section-areas__header">
-      <span class="section-areas__header__subtitle">Áreas de Atuação</span>
-      <h2 class="section-areas__header__title">Nossas Especialidades</h2>
+<section class={styles.sectionAreas}>
+  <div class={styles.sectionAreas__container}>
+    <div class={styles.sectionAreas__header}>
+      <span class={styles.sectionAreas__header__subtitle}>Sobre nós</span>
+      <h2 class={styles.sectionAreas__header__title}>Áreas de Atuação</h2>
     </div>
     
-    <div class="section-areas__grid">
+    <div class={styles.sectionAreas__grid}>
       {areas.map((area) => (
-        <div class="section-areas__card">
-          <h3 class="section-areas__card__title">{area.title}</h3>
-          <p class="section-areas__card__description">{area.description}</p>
+        <div class={styles.sectionAreas__card}>
+          <div class={styles.sectionAreas__card__icon}>
+            <span class="material-icons" style="color: var(--accent-color);">{area.icon}</span>
+          </div>
+          <h3 class={styles.sectionAreas__card__title}>{area.title}</h3>
+          <p class={styles.sectionAreas__card__description}>{area.description}</p>
         </div>
       ))}
     </div>
+    
+    <div class={styles.sectionAreas__buttonContainer}>
+      <Button href="/contato" class={styles.sectionAreas__button}>Fale com nossos especialistas</Button>
+    </div>
   </div>
 </section>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

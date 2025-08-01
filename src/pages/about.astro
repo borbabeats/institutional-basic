@@ -2,11 +2,17 @@
 import "../styles/global.scss";
 import styles from './about.module.scss';
 import Layout from '../layouts/Layout.astro';
+import SectionAboutUsSecondary from '../components/Sections/SectionAboutUsSecondary/SectionAboutUsSecondary.astro';
+import SectionCardTopics from '../components/Sections/SectionCardTopics/SectionCardTopics.astro';
+import SectionBannerContainer from "../components/Sections/SectionBannerContainer/SectionBannerContainer.astro";
+import SectionTeam from "../components/Sections/SectionTeam/SectionTeam.astro";
 ---
 
 <Layout>
   <main class={styles.main}>
-    <h1>Sobre Nós</h1>
-    <p>Somos um escritório de advocacia comprometido com a excelência, ética e resultados para nossos clientes. Nossa equipe é formada por profissionais experientes e dedicados.</p>
+    <SectionAboutUsSecondary />
+    <SectionTeam />
+    <SectionCardTopics />
+    <SectionBannerContainer />
   </main>
 </Layout>

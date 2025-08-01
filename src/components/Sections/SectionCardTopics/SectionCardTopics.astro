@@ -1,0 +1,26 @@
+---
+import styles from './SectionCardTopics.module.scss';
+const content = [
+    {
+        title: "Qualificação Técnica",
+        description: "Conhecimento técnico aprofundado e atualizado com as últimas tendências e legislações.",
+    },
+    {
+        title: "Atendimento Personalizado",
+        description: "Soluções jurídicas personalizadas para atender às necessidades específicas de cada cliente.",
+    },
+    {
+        title: "Compromisso com Resultados",
+        description: "Foco em entregar os melhores resultados com excelência e eficiência.",
+    }
+]
+---
+<section class={styles.sectionCardTopics}>
+    {content.map((item, index) => (
+            <div class={styles.sectionCardTopics__item}>
+                <span>0{index + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+            </div>
+        ))}
+</section>

@@ -1,0 +1,28 @@
+@use '../../../styles/color' as color;
+@use '../../../styles/_sizes' as sizes;
+.sectionBannerSecondary {
+    padding: 6rem 0;
+    background-color: color.$light;
+
+    &__container {
+        @include sizes.container;
+        padding: 6rem 2rem;
+        text-align: center;
+        position: relative;
+        background: linear-gradient(
+        rgba(color.$tertiary, 0.75),
+        rgba(color.$tertiary, 0.75)
+    ),
+    url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: color.$light;
+        z-index: 1;
+    }
+
+    h3 {
+        margin-bottom: 2rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+}

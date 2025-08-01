@@ -1,0 +1,103 @@
+@use '../../../styles/_color.scss' as color;
+@use '../../../styles/_sizes.scss' as sizes;
+
+.aboutUs {
+    background: color.$light;
+    padding: 6rem 0;
+    
+    &__container {
+        @include sizes.container;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4rem;
+        
+        @media (max-width: 768px) {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+    
+    &__content {
+        flex: 1;
+        max-width: 600px;
+    }
+    
+    &__header {
+        margin-bottom: 2rem;
+    }
+    
+    &__subtitle {
+        display: inline-block;
+        color: color.$primary;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+        position: relative;
+        padding: 0.5rem 0;
+        
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: color.$accent;
+        }
+        
+        &::before {
+            top: 0;
+        }
+        
+        &::after {
+            bottom: 0;
+        }
+    }
+    
+    &__title {
+        color: color.$primary;
+        font-size: 2.5rem;
+        margin: 1rem 0;
+        line-height: 1.2;
+    }
+    
+    &__text {
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        
+        p {
+            margin: 0 0 1rem 0;
+            color: color.$dark;
+            
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+    
+    &__action {
+        margin-top: 2rem;
+    }
+    
+    &__image {
+        flex: 1;
+        max-width: 600px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    &__img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+        
+        &:hover {
+            transform: scale(1.02);
+        }
+    }
+}
