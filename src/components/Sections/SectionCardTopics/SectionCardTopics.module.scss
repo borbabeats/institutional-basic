@@ -3,7 +3,7 @@
 
 .sectionCardTopics {
     @include sizes.container;
-    padding: 6rem 0;
+    padding: 6rem 1rem;
     background-color: color.$light;
     display: flex;
     flex-wrap: wrap;
