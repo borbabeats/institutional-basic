@@ -2,11 +2,44 @@
 import "../styles/global.scss";
 import styles from './blog.module.scss';
 import Layout from '../layouts/Layout.astro';
+import { apiClient } from '../api/api';
+import GridPost from '../components/GridPost/GridPost.astro';
+
+let posts = [];
+try {
+  console.log('Iniciando requisição para a API...');
+  const response = await apiClient.get('/api/posts');
+  console.log('Resposta da API:', {
+    status: response.status,
+    statusText: response.statusText,
+    data: response.data
+  });
+  
+  // Ajuste para a estrutura correta da API
+  posts = Array.isArray(response?.data?.data) ? response.data.data : [];
+  console.log('Posts carregados:', posts);
+} catch (error: unknown) {
+  console.error('Erro detalhado:', {
+    message: error instanceof Error ? error.message : 'Unknown error',
+    response: error && typeof error === 'object' && 'response' in error 
+      ? (error as any).response?.data 
+      : undefined,
+    status: error && typeof error === 'object' && 'response' in error
+      ? (error as any).response?.status
+      : undefined
+  });
+  posts = [];
+}
 ---
 
 <Layout>
-  <main class={styles.main}>
-    <h1>Blog</h1>
-    <p>Em breve, novidades e artigos sobre o mundo jurídico.</p>
+  <main class={styles.section_blog}>
+    <div class={styles.section_blog__container}>
+      <div class={styles.section_blog__header}>
+        <span class={styles.section_blog__subtitle}>Blog</span>
+        <h1 class={styles.section_blog__title}>Acompanhe nossas atualizações</h1>
+      </div>
+    <GridPost posts={posts} />
+    </div>
   </main>
 </Layout>

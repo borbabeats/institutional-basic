@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "astro": "^5.12.5",
+    "axios": "^1.11.0",
     "lucide-astro": "^0.533.0"
   },
   "devDependencies": {

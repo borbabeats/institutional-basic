@@ -1,0 +1,144 @@
+@use '../../styles/color' as colors;
+@use '../../styles/sizes' as sizes;
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  width: 100%;
+  margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.card {
+  background: colors.$light;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; // 16:9 aspect ratio
+  overflow: hidden;
+  background: #f5f7fa;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+
+  .card:hover & {
+    transform: scale(1.03);
+  }
+}
+
+.content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: colors.$quaternary;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.author {
+  color: colors.$primary;
+  font-weight: 500;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: colors.$primary;
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 3.5rem;
+}
+
+.excerpt {
+  color: colors.$quaternary;
+  margin: 0 0 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+}
+
+.readMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: colors.$primary;
+  font-weight: 500;
+  text-decoration: none;
+  margin-top: auto;
+  transition: color 0.2s ease;
+  width: fit-content;
+
+  &:hover {
+    color: darken(colors.$primary, 10%);
+    text-decoration: underline;
+
+    svg {
+      transform: translateX(4px);
+    }
+  }
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+}
+
+.noPosts {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: colors.$light;
+  border-radius: 8px;
+  margin: 2rem 0;
+  color: colors.$quaternary;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}

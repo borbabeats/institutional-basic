@@ -1,0 +1,75 @@
+---
+import styles from './GridPost.module.scss';
+
+interface Author {
+  name: string;
+}
+
+interface Post {
+  id: number | string;
+  title: string;
+  content: string;
+  created_at: string;
+  author?: Author;
+  featured_image?: string;
+  excerpt?: string;
+}
+
+interface Props {
+  posts: Post[];
+}
+
+const { posts } = Astro.props as Props;
+---
+
+{posts.length > 0 ? (
+  <div class={styles.grid}>
+    {posts.map((post) => (
+      <article class={styles.card}>
+        {post.featured_image && (
+          <div class={styles.imageContainer}>
+            <img 
+              src={post.featured_image} 
+              alt={post.title} 
+              class={styles.image}
+              loading="lazy"
+            />
+          </div>
+        )}
+        <div class={styles.content}>
+          <div class={styles.meta}>
+            <span class={styles.date}>
+              {new Date(post.created_at).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+              })}
+            </span>
+            {post.author?.name && (
+              <span class={styles.author}>Por {post.author.name}</span>
+            )}
+          </div>
+          <h3 class={styles.title}>
+            {post.title || 'Sem título'}
+          </h3>
+          {post.excerpt && (
+            <p class={styles.excerpt}>
+              {post.excerpt}
+            </p>
+          )}
+          <a href={`/blog/${post.id}`} class={styles.readMore}>
+            Ler mais
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+) : (
+  <div class={styles.noPosts}>
+    <p>Nenhum post encontrado. Volte em breve para conferir nossas novidades!</p>
+  </div>
+)}
