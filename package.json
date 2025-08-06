@@ -11,7 +11,8 @@
   "dependencies": {
     "astro": "^5.12.5",
     "axios": "^1.11.0",
-    "lucide-astro": "^0.533.0"
+    "lucide-astro": "^0.533.0",
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "sass": "^1.89.2"
