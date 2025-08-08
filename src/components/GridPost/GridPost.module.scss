@@ -101,6 +101,7 @@
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -111,7 +112,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: colors.$primary;
+  color: colors.$accent;
   font-weight: 500;
   text-decoration: none;
   margin-top: auto;

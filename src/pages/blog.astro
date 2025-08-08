@@ -17,7 +17,18 @@ try {
   
   // Ajuste para a estrutura correta da API
   posts = Array.isArray(response?.data?.data) ? response.data.data : [];
-  console.log('Posts carregados:', posts);
+  console.log('Posts carregados:', JSON.stringify(posts, null, 2));
+  
+  // Log detalhado de cada post
+  posts.forEach((post: any, index: number) => {
+    console.log(`Post ${index + 1}:`, {
+      id: post.id,
+      title: post.title,
+      image_url: post.image_url,
+      has_image: !!post.image_url,
+      full_post: post
+    });
+  });
 } catch (error: unknown) {
   console.error('Erro detalhado:', {
     message: error instanceof Error ? error.message : 'Unknown error',

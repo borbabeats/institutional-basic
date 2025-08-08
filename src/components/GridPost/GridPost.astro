@@ -5,15 +5,20 @@ interface Author {
   name: string;
 }
 
+interface Category {
+  name: string;
+}
+
 interface Post {
   id: number | string;
   title: string;
+  slug: string;
   content: string;
   created_at: string;
   author?: Author;
-  featured_image?: string;
+  image_url?: string;
   excerpt?: string;
-  category?: string;
+  category?: Category;
 }
 
 interface Props {
@@ -21,16 +26,19 @@ interface Props {
 }
 
 const { posts } = Astro.props as Props;
+
+// Log para depuração
+console.log('Posts no GridPost:', JSON.stringify(posts, null, 2));
 ---
 
 {posts.length > 0 ? (
   <div class={styles.grid}>
     {posts.map((post) => (
       <article class={styles.card}>
-        {post.featured_image && (
+        {post.image_url && (
           <div class={styles.imageContainer}>
             <img 
-              src={post.featured_image} 
+              src={post.image_url} 
               alt={post.title} 
               class={styles.image}
               loading="lazy"
@@ -46,12 +54,12 @@ const { posts } = Astro.props as Props;
                 year: 'numeric'
               })}
             </span>
-            {post.author?.name && (
+            {/* {post.author?.name && (
               <span class={styles.author}>Por {post.author.name}</span>
-            )}
-            {post.category && (
+            )} */}
+            {/* {post.category && (
               <span class={styles.category}>{post.category}</span>
-            )}
+            )} */}
           </div>
           <h3 class={styles.title}>
             {post.title || 'Sem título'}
@@ -61,8 +69,8 @@ const { posts } = Astro.props as Props;
               {post.excerpt}
             </p>
           )}
-          <a href={`/blog/${post.id}`} class={styles.readMore}>
-            Ler mais
+          <a href={`/blog/${post.slug}`} class={styles.readMore}>
+            Leia mais
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
