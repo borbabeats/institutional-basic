@@ -2,74 +2,27 @@
 import "../styles/global.scss";
 import styles from './blog.module.scss';
 import Layout from '../layouts/Layout.astro';
-import { apiClient } from '../api/api.js';
+import { apiClient } from '../api/api';
 import GridPost from '../components/GridPost/GridPost.astro';
-// Import the React version of SearchFilter with client:only
-import SearchFilter from '../components/SearchFilter.jsx';
+let posts = [];
+try {
 
-// Define the Post type for TypeScript
-type Post = {
-    id: string | number;
-    title: string;
-    description: string;
-    slug: string;
-    content: string;
-    created_at: string;
-    [key: string]: any;  // For any additional properties
-};
+  const response = await apiClient.get(`/api/posts?status=published&page=1&limit=10`);
+  posts = Array.isArray(response?.data?.data) ? response.data.data : [];
 
-// State for posts and search term
-let posts: Post[] = [];
-const searchParams = new URL(Astro.request.url).searchParams;
-let searchTerm = searchParams.get('search') || '';
-
-// Function to fetch posts with search term
-async function fetchPosts(searchTerm = '') {
-  try {
-    const response = await apiClient.get(`/api/posts?term=${encodeURIComponent(searchTerm)}&page=1&limit=10&status=published`);
-    console.log(response.data.data);
-    return Array.isArray(response?.data?.data) 
-      ? response.data.data.map((post: any) => ({
-          id: post.id || '',
-          title: post?.title || 'Sem título',
-          description: post?.description || '',
-          slug: post?.slug || `post-${post.id}`,
-          content: post?.content || '',
-          created_at: post?.createdAt || new Date().toISOString(),
-          ...post
-        }))
-      : [];
-      
-  } catch (error: any) {
-    console.error('Erro ao buscar posts:', {
-      message: error instanceof Error ? error.message : 'Unknown error',
-      response: error?.response?.data,
-      status: error?.response?.status
-    });
-    return [];
-  }
+} catch (error: unknown) {
+  console.error('Erro detalhado:', {
+    message: error instanceof Error ? error.message : 'Unknown error',
+    response: error && typeof error === 'object' && 'response' in error 
+      ? (error as any).response?.data 
+      : undefined,
+    status: error && typeof error === 'object' && 'response' in error
+      ? (error as any).response?.status
+      : undefined
+  });
+  posts = [];
 }
-
-// Fetch initial posts
-posts = await fetchPosts(searchTerm);
-
-// Handle search from client-side
-const handleSearch = (term: string) => {
-  // Update URL with search term
-  const url = new URL(Astro.request.url);
-  if (term) {
-    url.searchParams.set('search', term);
-  } else {
-    url.searchParams.delete('search');
-  }
-  // Navigate to the new URL
-  window.history.pushState({}, '', url.toString());
-  
-  // Reload the page to fetch new results
-  window.location.reload();
-};
 ---
-
 <Layout>
   <main class={styles.section_blog}>
     <div class={styles.section_blog__container}>
@@ -77,24 +30,15 @@ const handleSearch = (term: string) => {
         <span class={styles.section_blog__subtitle}>Blog</span>
         <h1 class={styles.section_blog__title}>Acompanhe nossas atualizações</h1>
       </div>
-      
-      <!-- Search Filter Component -->
-      <SearchFilter 
-        client:only="react"
-        onSearch={handleSearch} 
-        initialValue={searchTerm}
-      />
-      
-      {searchTerm && (
-        <p style="margin: 1rem 0; color: #666;">
-          Resultados para: <strong>{searchTerm}</strong>
-          <a href="/blog" style="margin-left: 1rem; color: #007bff; text-decoration: none;">
-            Limpar busca
-          </a>
-        </p>
-      )}
-      
-      <GridPost posts={posts} />
+      <nav>
+        <ul class={styles.section_blog__nav}>
+          <li class={styles.section_blog__navItem}><a href={`/blog`}>Todas as categorias</a></li>
+          <li class={styles.section_blog__navItem}><a href={`/category_slug/criminal`}>Criminal</a></li>
+          <li class={styles.section_blog__navItem}><a href={`/category_slug/trabalhista`}>Trabalhista</a></li>
+          <li class={styles.section_blog__navItem}><a href={`/category_slug/familiar`}>Familiar</a></li>
+        </ul>
+      </nav>
+    <GridPost posts={posts} />
     </div>
   </main>
 </Layout>

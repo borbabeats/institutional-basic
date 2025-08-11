@@ -9,7 +9,7 @@ export interface ApiResponse<T = any> {
 
 // Define your API endpoints
 export const API_ENDPOINTS = {
-  BASE: 'http://localhost:3000', //'https://institutional-cms.onrender.com',
+  BASE: 'https://institutional-cms.onrender.com',
 } as const;
 
 // Create axios instance with default config

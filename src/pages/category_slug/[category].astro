@@ -1,0 +1,78 @@
+---
+import "../../styles/global.scss";
+import styles from '../blog.module.scss';
+import Layout from '../../layouts/Layout.astro';
+import { apiClient } from '../../api/api';
+import GridPost from '../../components/GridPost/GridPost.astro';
+
+// Enable server-side rendering
+export const prerender = false;
+
+export async function getStaticPaths() {
+  // Define categories inside getStaticPaths
+  const categories = [
+    { slug: 'criminal', name: 'Criminal' },
+    { slug: 'trabalhista', name: 'Trabalhista' },
+    { slug: 'familiar', name: 'Familiar' }
+  ];
+
+  return categories.map(category => ({
+    params: { category: category.slug },
+    props: { categoryName: category.name }
+  }));
+}
+
+const { category } = Astro.params;
+const { categoryName } = Astro.props;
+let posts = [];
+
+try {
+  const response = await apiClient.get(`/api/posts?category_slug=${category}&status=published&page=1&limit=10`);
+  posts = Array.isArray(response?.data?.data) ? response.data.data : [];
+} catch (error: unknown) {
+  console.error('Error fetching category posts:', {
+    message: error instanceof Error ? error.message : 'Unknown error',
+    response: error && typeof error === 'object' && 'response' in error 
+      ? (error as any).response?.data 
+      : undefined,
+    status: error && typeof error === 'object' && 'response' in error
+      ? (error as any).response?.status
+      : undefined
+  });
+  posts = [];
+}
+
+// Navigation categories
+const navCategories = [
+  { slug: 'criminal', name: 'Criminal' },
+  { slug: 'trabalhista', name: 'Trabalhista' },
+  { slug: 'familiar', name: 'Familiar' }
+];
+---
+<Layout>
+  <main class={styles.section_blog}>
+    <div class={styles.section_blog__container}>
+      <div class={styles.section_blog__header}>
+        <span class={styles.section_blog__subtitle}>Categoria</span>
+        <h1 class={styles.section_blog__title}>{categoryName || category}</h1>
+      </div>
+      <nav>
+        <ul class={styles.section_blog__nav}>
+          <li class={styles.section_blog__navItem}><a href="/blog">Todas as categorias</a></li>
+          {navCategories.map(cat => (
+            <li class={`${styles.section_blog__navItem} ${category === cat.slug ? 'active' : ''}`}>
+              <a href={`/category_slug/${cat.slug}`}>{cat.name}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <GridPost posts={posts} />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .active {
+    font-weight: bold;
+  }
+</style>
