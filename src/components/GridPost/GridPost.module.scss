@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../../styles/color' as colors;
 @use '../../styles/sizes' as sizes;
 
@@ -120,7 +121,7 @@
   width: fit-content;
 
   &:hover {
-    color: darken(colors.$primary, 10%);
+    color: color.scale(colors.$primary, $lightness: -10%);
     text-decoration: underline;
 
     svg {

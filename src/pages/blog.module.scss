@@ -55,7 +55,43 @@
   &__title {
     color: color.$primary;
     font-size: 2.5rem;
-    margin: 1rem 0;
+    margin: 1rem 0 2rem 0;
     line-height: 1.2;
+  }
+
+  .searchContainer {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+  }
+
+  .searchInput {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 30px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    
+    &:focus {
+      outline: none;
+      border-color: color.$primary;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    &::placeholder {
+      color: #999;
+    }
+  }
+
+  .searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
   }
 }

@@ -23,16 +23,15 @@ interface Post {
 
 interface Props {
   posts: Post[];
+  id?: string;
 }
 
-const { posts } = Astro.props as Props;
+const { posts, id } = Astro.props as Props;
 
-// Log para depuração
-console.log('Posts no GridPost:', JSON.stringify(posts, null, 2));
 ---
 
 {posts.length > 0 ? (
-  <div class={styles.grid}>
+  <div id={id} class={styles.grid}>
     {posts.map((post) => (
       <article class={styles.card}>
         {post.image_url && (
@@ -54,12 +53,6 @@ console.log('Posts no GridPost:', JSON.stringify(posts, null, 2));
                 year: 'numeric'
               })}
             </span>
-            {/* {post.author?.name && (
-              <span class={styles.author}>Por {post.author.name}</span>
-            )} */}
-            {/* {post.category && (
-              <span class={styles.category}>{post.category}</span>
-            )} */}
           </div>
           <h3 class={styles.title}>
             {post.title || 'Sem título'}
