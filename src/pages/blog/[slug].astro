@@ -3,6 +3,8 @@ import "../../styles/global.scss";
 import Layout from '../../layouts/Layout.astro';
 import { apiClient } from '../../api/api';
 
+export const prerender = true;
+
 interface Author {
   name: string;
 }
