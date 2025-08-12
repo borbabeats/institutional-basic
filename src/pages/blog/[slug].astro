@@ -2,6 +2,7 @@
 import "../../styles/global.scss";
 import Layout from '../../layouts/Layout.astro';
 import { apiClient } from '../../api/api';
+import styles from './style.module.scss';
 
 export const prerender = true;
 
@@ -16,7 +17,7 @@ interface Post {
   content: string;
   created_at: string;
   author?: Author;
-  featured_image?: string;
+  image_url?: string;
   excerpt?: string;
   category?: string;
 }
@@ -45,16 +46,16 @@ if (!post) {
   return Astro.redirect('/blog');
 }
 
-console.log(post);
+console.log(post.image_url);
 ---
 
 <Layout>
-  <main class="blog-post">
-    <div class="container">
+  <main class={styles.blogPost}>
+    <div class={styles.container}>
       <article>
         <header>
-          <h1>{post.title}</h1>
-          <div class="meta">
+          <!-- <h1>{post.title}</h1> -->
+          <div class={styles.meta}>
             <time datetime={new Date(post.created_at).toISOString()}>
               {new Date(post.created_at).toLocaleDateString('pt-BR', {
                 day: '2-digit',
@@ -63,84 +64,22 @@ console.log(post);
               })}
             </time>
           </div>
-          {post.featured_image && (
+          {post.image_url && (
             <img 
-              src={post.featured_image} 
+              src={post.image_url} 
               alt={post.title}
-              class="featured-image"
+              class={styles.featuredImage}
               loading="lazy"
             />
           )}
         </header>
         
-        <div class="content" set:html={post.content} />
+        <div class={styles.content} set:html={post.content} />
         
         <footer>
-          <a href="/blog" class="back-link">← Voltar para o blog</a>
+          <a href="/blog" class={styles.backLink}>← Voltar para o blog</a>
         </footer>
       </article>
     </div>
   </main>
 </Layout>
-
-<style>
-  .blog-post {
-    padding: 2rem 0;
-  }
-  
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .meta {
-    color: #666;
-    margin-bottom: 2rem;
-  }
-  
-  .featured-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 2rem 0;
-  }
-  
-  .content {
-    line-height: 1.8;
-    margin-bottom: 3rem;
-  }
-  
-  .content :global(h2) {
-    margin: 2rem 0 1rem;
-    font-size: 1.8rem;
-  }
-  
-  .content :global(p) {
-    margin-bottom: 1.5rem;
-  }
-  
-  .content :global(img) {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 1.5rem 0;
-  }
-  
-  .back-link {
-    display: inline-block;
-    margin-top: 2rem;
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 500;
-  }
-  
-  .back-link:hover {
-    text-decoration: underline;
-  }
-</style>

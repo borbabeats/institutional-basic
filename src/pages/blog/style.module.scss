@@ -1,0 +1,111 @@
+@use '../../styles/color.scss' as color;
+@use '../../styles/sizes.scss' as sizes;
+
+.blogPost {
+  padding: 3rem 0;
+  background-color: color.$light;
+  
+  .meta {
+    color: color.$dark;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    
+    time {
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  .featuredImage {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .content {
+    line-height: 1.8;
+    color: color.$dark;
+    margin-bottom: 3rem;
+    
+    h2, h3, h4, h5, h6 {
+      margin: 2.5rem 0 1.5rem;
+      color: color.$dark;
+    }
+    
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.5rem; }
+    
+    p {
+      margin-bottom: 1.5rem;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin: 1.5rem 0;
+    }
+    
+    a {
+      color: color.$primary;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      
+      &:hover {
+        color: darken(color.$primary, 10%);
+        text-decoration: underline;
+      }
+    }
+    
+    ul, ol {
+      margin: 1.5rem 0;
+      padding-left: 1.5rem;
+      
+      li {
+        margin-bottom: 0.5rem;
+      }
+    }
+    
+    blockquote {
+      border-left: 4px solid color.$primary;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      background: rgba(color.$primary, 0.05);
+      border-radius: 0 4px 4px 0;
+      
+      p {
+        margin: 0;
+        font-style: italic;
+      }
+    }
+  }
+  
+  .backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    color: color.$primary;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: darken(color.$primary, 10%);
+      text-decoration: underline;
+    }
+  }
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  
+  
+  @media (min-width: 768px) {
+    padding: 0;
+  }
+}

@@ -17,6 +17,11 @@
     flex-wrap: wrap;
     gap: 2rem;
     padding: 2rem 0;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+    }
   }
 
   &__logo {
@@ -82,11 +87,16 @@
     padding: 1.5rem 0;
     border-top: 1px solid rgba(color.$light, 0.1);
     margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @include sizes.container;
     
     p {
-      margin: 0;
+      margin: 1rem 0;
       font-size: 0.9rem;
       opacity: 0.8;
     }
+    
   }
 }
