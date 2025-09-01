@@ -1,28 +1,9 @@
 ---
 import styles from './GridPost.module.scss';
-
-interface Author {
-  name: string;
-}
-
-interface Category {
-  name: string;
-}
-
-interface Post {
-  id: number | string;
-  title: string;
-  slug: string;
-  content: string;
-  created_at: string;
-  author?: Author;
-  image_url?: string;
-  excerpt?: string;
-  category?: Category;
-}
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  posts: Post[];
+  posts: CollectionEntry<'blog'>[];
   id?: string;
 }
 
@@ -34,11 +15,11 @@ const { posts, id } = Astro.props as Props;
   <div id={id} class={styles.grid}>
     {posts.map((post) => (
       <article class={styles.card}>
-        {post.image_url && (
+        {post.data.image && (
           <div class={styles.imageContainer}>
             <img 
-              src={post.image_url} 
-              alt={post.title} 
+              src={post.data.image} 
+              alt={post.data.title} 
               class={styles.image}
               loading="lazy"
             />
@@ -47,7 +28,7 @@ const { posts, id } = Astro.props as Props;
         <div class={styles.content}>
           <div class={styles.meta}>
             <span class={styles.date}>
-              {new Date(post.created_at).toLocaleDateString('pt-BR', {
+              {post.data.pubDate.toLocaleDateString('pt-BR', {
                 day: '2-digit',
                 month: 'short',
                 year: 'numeric'
@@ -55,11 +36,11 @@ const { posts, id } = Astro.props as Props;
             </span>
           </div>
           <h3 class={styles.title}>
-            {post.title || 'Sem título'}
+            {post.data.title || 'Sem título'}
           </h3>
-          {post.excerpt && (
+          {post.data.description && (
             <p class={styles.excerpt}>
-              {post.excerpt}
+              {post.data.description}
             </p>
           )}
           <a href={`/blog/${post.slug}`} class={styles.readMore}>

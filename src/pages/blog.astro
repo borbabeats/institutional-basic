@@ -2,26 +2,11 @@
 import "../styles/global.scss";
 import styles from './blog.module.scss';
 import Layout from '../layouts/Layout.astro';
-import { apiClient } from '../api/api';
+import { getCollection } from 'astro:content';
 import GridPost from '../components/GridPost/GridPost.astro';
-let posts = [];
-try {
 
-  const response = await apiClient.get(`/api/posts?status=published&page=1&limit=10`);
-  posts = Array.isArray(response?.data?.data) ? response.data.data : [];
-
-} catch (error: unknown) {
-  console.error('Erro detalhado:', {
-    message: error instanceof Error ? error.message : 'Unknown error',
-    response: error && typeof error === 'object' && 'response' in error 
-      ? (error as any).response?.data 
-      : undefined,
-    status: error && typeof error === 'object' && 'response' in error
-      ? (error as any).response?.status
-      : undefined
-  });
-  posts = [];
-}
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 <Layout>
   <main class={styles.section_blog}>
@@ -38,7 +23,7 @@ try {
           <li class={styles.section_blog__navItem}><a href={`/category_slug/familiar`}>Familiar</a></li>
         </ul>
       </nav>
-    <GridPost posts={posts} />
+    <GridPost posts={sortedPosts} />
     </div>
   </main>
 </Layout>

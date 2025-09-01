@@ -1,52 +1,22 @@
 ---
 import "../../styles/global.scss";
 import Layout from '../../layouts/Layout.astro';
-import { apiClient } from '../../api/api';
+import { getCollection } from 'astro:content';
 import styles from './style.module.scss';
 
 export const prerender = true;
 
-interface Author {
-  name: string;
-}
-
-interface Post {
-  id: number | string;
-  title: string;
-  slug: string;
-  content: string;
-  created_at: string;
-  author?: Author;
-  image_url?: string;
-  excerpt?: string;
-  category?: string;
-}
-
 export async function getStaticPaths() {
-  try {
-    const response = await apiClient.get('/api/posts');
-    const posts = (response?.data?.data || []) as Post[];
-    
-    return posts.map((post) => {
-      const slug = post.slug || post.title.toLowerCase().replace(/[^\w]+/g, '-');
-      return {
-        params: { slug },
-        props: { post },
-      };
-    });
-  } catch (error) {
-    console.error('Error fetching posts for static paths:', error);
-    return [];
-  }
+  const posts = await getCollection('blog');
+  
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
 }
 
-const { post } = Astro.props as { post: Post };
-
-if (!post) {
-  return Astro.redirect('/blog');
-}
-
-console.log(post.image_url);
+const { post } = Astro.props;
+const { Content } = await post.render();
 ---
 
 <Layout>
@@ -54,27 +24,30 @@ console.log(post.image_url);
     <div class={styles.container}>
       <article>
         <header>
-          <!-- <h1>{post.title}</h1> -->
+          <h1>{post.data.title}</h1>
           <div class={styles.meta}>
-            <time datetime={new Date(post.created_at).toISOString()}>
-              {new Date(post.created_at).toLocaleDateString('pt-BR', {
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString('pt-BR', {
                 day: '2-digit',
                 month: 'long',
                 year: 'numeric'
               })}
             </time>
+            {post.data.author && <span>por {post.data.author}</span>}
           </div>
-          {post.image_url && (
+          {post.data.image && (
             <img 
-              src={post.image_url} 
-              alt={post.title}
+              src={post.data.image} 
+              alt={post.data.title}
               class={styles.featuredImage}
               loading="lazy"
             />
           )}
         </header>
         
-        <div class={styles.content} set:html={post.content} />
+        <div class={styles.content}>
+          <Content />
+        </div>
         
         <footer>
           <a href="/blog" class={styles.backLink}>← Voltar para o blog</a>
