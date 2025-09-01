@@ -15,7 +15,7 @@ const { posts, id } = Astro.props as Props;
   <div id={id} class={styles.grid}>
     {posts.map((post) => (
       <article class={styles.card}>
-        {post.data.image && (
+        {post.data?.image && (
           <div class={styles.imageContainer}>
             <img 
               src={post.data.image} 
@@ -28,17 +28,17 @@ const { posts, id } = Astro.props as Props;
         <div class={styles.content}>
           <div class={styles.meta}>
             <span class={styles.date}>
-              {post.data.pubDate.toLocaleDateString('pt-BR', {
+              {post.data?.pubDate?.toLocaleDateString('pt-BR', {
                 day: '2-digit',
                 month: 'short',
                 year: 'numeric'
-              })}
+              }) || 'Data não disponível'}
             </span>
           </div>
           <h3 class={styles.title}>
-            {post.data.title || 'Sem título'}
+            {post.data?.title || 'Sem título'}
           </h3>
-          {post.data.description && (
+          {post.data?.description && (
             <p class={styles.excerpt}>
               {post.data.description}
             </p>

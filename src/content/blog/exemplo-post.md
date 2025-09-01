@@ -3,8 +3,8 @@ title: "Exemplo de Post do Blog"
 description: "Este é um exemplo de post usando Markdown estático"
 pubDate: 2024-01-15
 author: "Escritório de Advocacia"
-category: "Direito Civil"
-image: "/images/blog/exemplo.jpg"
+category: "criminal"
+image: "/images/tingey-injury-law-firm-6sl88x150-Xs-unsplash.jpg"
 ---
 
 # Exemplo de Post do Blog

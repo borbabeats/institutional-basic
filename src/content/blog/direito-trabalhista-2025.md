@@ -3,8 +3,8 @@ title: "Guia Completo sobre Direito Trabalhista em 2025"
 description: "Conheça as principais mudanças na legislação trabalhista e seus direitos como trabalhador"
 pubDate: 2025-01-15
 author: "Escritório de Advocacia"
-category: "Direito Trabalhista"
-image: "/images/blog/direito-trabalhista.jpg"
+category: "trabalhista"
+image: "/images/tingey-injury-law-firm-6sl88x150-Xs-unsplash.jpg"
 ---
 
 # Guia Completo sobre Direito Trabalhista em 2025

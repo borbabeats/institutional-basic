@@ -4,7 +4,7 @@ description: "Entenda os pilares do Direito Civil e sua importância na regulame
 pubDate: 2025-01-10
 author: "Escritório de Advocacia"
 category: "Direito Civil"
-image: "/images/blog/direito-civil.jpg"
+image: "/images/direitocivil.jpg"
 ---
 
 # Direito Civil: Fundamentos e Importância no Ordenamento Jurídico
