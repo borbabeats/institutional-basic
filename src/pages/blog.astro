@@ -18,9 +18,9 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
       <nav>
         <ul class={styles.section_blog__nav}>
           <li class={styles.section_blog__navItem}><a href={`/blog`}>Todas as categorias</a></li>
+          <li class={styles.section_blog__navItem}><a href={`/category_slug/direito-civil`}>Direito Civil</a></li>
+          <li class={styles.section_blog__navItem}><a href={`/category_slug/direito-trabalhista`}>Direito Trabalhista</a></li>
           <li class={styles.section_blog__navItem}><a href={`/category_slug/criminal`}>Criminal</a></li>
-          <li class={styles.section_blog__navItem}><a href={`/category_slug/trabalhista`}>Trabalhista</a></li>
-          <li class={styles.section_blog__navItem}><a href={`/category_slug/familiar`}>Familiar</a></li>
         </ul>
       </nav>
     <GridPost posts={sortedPosts} />

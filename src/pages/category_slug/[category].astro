@@ -2,51 +2,34 @@
 import "../../styles/global.scss";
 import styles from '../blog.module.scss';
 import Layout from '../../layouts/Layout.astro';
-import { apiClient } from '../../api/api';
+import { getCollection } from 'astro:content';
 import GridPost from '../../components/GridPost/GridPost.astro';
 
-// Enable server-side rendering
 export const prerender = true;
 
 export async function getStaticPaths() {
-  // Define categories inside getStaticPaths
-  const categories = [
-    { slug: 'criminal', name: 'Criminal' },
-    { slug: 'trabalhista', name: 'Trabalhista' },
-    { slug: 'familiar', name: 'Familiar' }
-  ];
-
+  const allPosts = await getCollection('blog');
+  const categories = [...new Set(allPosts.map(post => post.data.category).filter(Boolean))];
+  
   return categories.map(category => ({
-    params: { category: category.slug },
-    props: { categoryName: category.name }
+    params: { category: category!.toLowerCase().replace(/\s+/g, '-') },
+    props: { categoryName: category }
   }));
 }
 
 const { category } = Astro.params;
 const { categoryName } = Astro.props;
-let posts = [];
 
-try {
-  const response = await apiClient.get(`/api/posts?category_slug=${category}&status=published&page=1&limit=10`);
-  posts = Array.isArray(response?.data?.data) ? response.data.data : [];
-} catch (error: unknown) {
-  console.error('Error fetching category posts:', {
-    message: error instanceof Error ? error.message : 'Unknown error',
-    response: error && typeof error === 'object' && 'response' in error 
-      ? (error as any).response?.data 
-      : undefined,
-    status: error && typeof error === 'object' && 'response' in error
-      ? (error as any).response?.status
-      : undefined
-  });
-  posts = [];
-}
+const allPosts = await getCollection('blog');
+const posts = allPosts.filter(post => 
+  post.data.category?.toLowerCase().replace(/\s+/g, '-') === category
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Navigation categories
 const navCategories = [
-  { slug: 'criminal', name: 'Criminal' },
-  { slug: 'trabalhista', name: 'Trabalhista' },
-  { slug: 'familiar', name: 'Familiar' }
+  { slug: 'direito-civil', name: 'Direito Civil' },
+  { slug: 'direito-trabalhista', name: 'Direito Trabalhista' },
+  { slug: 'criminal', name: 'Criminal' }
 ];
 ---
 <Layout>
